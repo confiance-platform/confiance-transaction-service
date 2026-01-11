@@ -18,9 +18,9 @@ public class TransactionController {
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<ApiResponse<Page<Transaction>>> getUserTransactions(
-            @PathVariable Long userId,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size) {
+            @PathVariable("userId") Long userId,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "20") int size) {
         Page<Transaction> transactions = repository.findByUserId(userId, PageRequest.of(page, size));
         return ResponseEntity.ok(ApiResponse.success(transactions));
     }
